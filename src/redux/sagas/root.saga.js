@@ -3,6 +3,7 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 function* watcherSaga() {
     yield takeEvery('GET_MOVIES', getMoviesSaga);
+    yield takeEvery('PUT_MOVIES', setDetailsSaga);
 }
 
 // GET request to server at /api/movies to tell server to get all movies from db
@@ -12,6 +13,15 @@ function* getMoviesSaga() {
         yield put({ type: 'SET_MOVIES', payload: movieResponse.data });
     } catch (error) {
         console.log('error fetching movies', error);
+    }
+}
+
+function* setDetailsSaga(action) {
+    try {
+        yield axios.put(`/api/movies`, action.payload);
+        yield put({ type: 'GET_MOVIES'})
+    } catch (error) {
+        console.log('error setting movie details');
     }
 }
 
