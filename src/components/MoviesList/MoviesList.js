@@ -28,7 +28,7 @@ export class MoviesList extends Component {
                         </Grid>
                     ))}
                 </Grid>
-                <pre>{JSON.stringify(this.props, null, 2)}</pre>
+                {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
             </div>
         )
     }
