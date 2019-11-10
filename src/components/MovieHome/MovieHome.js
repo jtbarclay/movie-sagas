@@ -8,8 +8,11 @@ export class MovieHome extends Component {
                 <CardMedia
                     onClick={() => this.props.setMovieDetails('details')}
                 >
-                    <img src={this.props.movie.poster}/>
+                    <img src={this.props.movie.poster} alt={this.props.movie.title}/>
                 </CardMedia>
+                <CardContent>
+                    <h2>{this.props.movie.title}</h2>
+                </CardContent>
             </div>
         )
     }

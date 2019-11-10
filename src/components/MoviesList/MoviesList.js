@@ -18,6 +18,7 @@ export class MoviesList extends Component {
                 >
                     {this.props.reduxState.moviesReducer.map((movie) => (
                         <Grid
+                            key={movie.id}
                             item
                             sm={4}
                         >

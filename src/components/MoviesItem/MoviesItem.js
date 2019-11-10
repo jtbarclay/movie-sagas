@@ -10,7 +10,7 @@ export class MoviesItem extends Component {
     }
 
     setMovieDetails = (newState) => {
-        console.log('setMovieDetails hit', newState);
+        // console.log('setMovieDetails hit', newState);
         this.setState({
             movieCard: newState,
         })
