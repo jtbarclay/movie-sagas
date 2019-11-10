@@ -5,7 +5,8 @@ export class MovieDetails extends Component {
     render() {
         return (
             <div>
-                <p>Details</p>
+                <h2>{this.props.movie.title}</h2>
+                <p>{this.props.movie.description}</p>
                 <Button 
                     variant='outlined' 
                     color='primary' 
