@@ -14,12 +14,12 @@ export class MovieDetails extends Component {
                 ))}
                 <Button 
                     variant='outlined' 
-                    color='primary' 
+                    color='default' 
                     onClick={() => this.props.setMovieDetails('home')}
                 >Back</Button>
                 <Button 
                     variant='outlined' 
-                    color='primary' 
+                    color='default' 
                     onClick={() => this.props.setMovieDetails('edit')}
                 >Edit</Button>
                 </CardContent>

@@ -47,12 +47,12 @@ export class MovieEdit extends Component {
                     </div>
                     <Button
                         variant='outlined'
-                        color='primary'
+                        color='default'
                         onClick={() => this.props.setMovieDetails('details')}
                     >Back</Button>
                     <Button
                         variant='outlined'
-                        color='primary'
+                        color='default'
                         onClick={this.editHandler}
                     >Save</Button>
                 </CardContent>

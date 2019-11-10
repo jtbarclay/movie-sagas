@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { CardMedia, CardContent } from '@material-ui/core';
+import { CardMedia, CardContent, CardHeader } from '@material-ui/core';
 
 export class MovieHome extends Component {
     render() {
         return (
             <div>
+                <CardHeader></CardHeader>
                 <CardMedia
                     onClick={() => this.props.setMovieDetails('details')}
                 >

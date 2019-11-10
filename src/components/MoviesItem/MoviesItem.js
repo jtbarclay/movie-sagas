@@ -3,6 +3,7 @@ import { Card } from '@material-ui/core';
 import MovieHome from '../MovieHome/MovieHome';
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieEdit from '../MovieEdit/MovieEdit';
+import './MoviesItem.css';
 
 export class MoviesItem extends Component {
     state = {
