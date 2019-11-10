@@ -3,20 +3,39 @@ const pool = require('../modules/pool');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
     //sql query to return all movies
     const query = `
         SELECT * FROM movies
-        ORDER BY title;
+        ORDER BY title
+        LIMIT $1
+        OFFSET $2;
     `;
 
-    pool.query(query)
+    pool.query(query, [req.body.limit, req.body.offset])
         .then((response) => {
             console.log('movies GET response', response);
             res.send(response.rows)
         })
         .catch((error) => {
             console.log('movies GET error', error);
+            res.sendStatus(500);
+        })
+})
+
+router.get('/', (req, res) => {
+    //get row count
+    const query = `
+        SELECT COUNT(*) FROM movies;
+    `;
+
+    pool.query(query)
+        .then((response) => {
+            console.log('/movies row count reesponse', response);
+            res.send(...response.rows)
+        })
+        .catch((error) => {
+            console.log('/movies row count error', error);
             res.sendStatus(500);
         })
 })

@@ -6,7 +6,7 @@ import MoviesItem from '../MoviesItem/MoviesItem';
 export class MoviesList extends Component {
 
     componentDidMount() {
-        this.props.dispatch({ type: 'GET_MOVIES' })
+        this.props.dispatch({ type: 'GET_MOVIES', payload: { limit: 3, offset: this.props.offset } });
     }
 
     render() {

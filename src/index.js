@@ -7,6 +7,7 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import rootReducer from './redux/reducers/root.reducer';
 import watcherSaga from './redux/sagas/root.saga';
+import { HashRouter as Router } from 'react-router-dom';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,4 +22,4 @@ const storeInstance = createStore(
 
 sagaMiddleware.run(watcherSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={storeInstance}><Router><App /></Router></Provider>, document.getElementById('root'));
