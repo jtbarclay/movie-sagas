@@ -19,7 +19,7 @@ export class MoviesList extends Component {
                     {this.props.reduxState.moviesReducer.map((movie) => (
                         <Grid
                             item
-                            sm={3}
+                            sm={4}
                         >
                             <MoviesItem
                                 movie={movie}

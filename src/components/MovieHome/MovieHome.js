@@ -5,13 +5,11 @@ export class MovieHome extends Component {
     render() {
         return (
             <div>
-                <CardMedia>
+                <CardMedia
+                    onClick={() => this.props.setMovieDetails('details')}
+                >
                     <img src={this.props.movie.poster}/>
                 </CardMedia>
-                <CardContent>
-                    <h2>{this.props.movie.title}</h2>
-                    <p>{this.props.movie.description}</p>
-                </CardContent>
             </div>
         )
     }
