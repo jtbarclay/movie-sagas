@@ -6,8 +6,11 @@ const router = express.Router();
 router.post('/', (req, res) => {
     //sql query to return all movies
     const query = `
-        SELECT * FROM movies
-        ORDER BY title
+        SELECT m.*, array_agg(g.name) as "genres" from movies_genres mg
+        JOIN movies m ON m.id=mg.movie_id
+        JOIN genres g ON g.id=mg.genre_id
+        GROUP BY m.id
+        ORDER BY m.title
         LIMIT $1
         OFFSET $2;
     `;

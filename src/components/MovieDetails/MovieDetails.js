@@ -8,6 +8,10 @@ export class MovieDetails extends Component {
                 <CardContent>
                 <h2>{this.props.movie.title}</h2>
                 <p>{this.props.movie.description}</p>
+                <h3>Genres:</h3>
+                {this.props.movie.genres.map((genre) => (
+                    <div>{genre}</div>
+                ))}
                 <Button 
                     variant='outlined' 
                     color='primary' 

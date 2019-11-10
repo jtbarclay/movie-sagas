@@ -17,6 +17,7 @@ function* getMoviesSaga(action) {
     }
 }
 
+// gets count of movies
 function* getMoviesCountSaga() {
     try {
         const movieCount = yield axios.get('/api/movies');
@@ -26,6 +27,7 @@ function* getMoviesCountSaga() {
     }
 }
 
+// edits movie details
 function* setDetailsSaga(action) {
     try {
         yield axios.put(`/api/movies`, action.payload);

@@ -13,20 +13,12 @@ class App extends Component {
     currentPage: 0,
   };
 
+  // get count for determing number of pages
   componentDidMount() {
-    // this.props.dispatch({ type: 'GET_MOVIES', payload: { limit: 3, offset: this.state.offset } });
     this.props.dispatch({ type: 'GET_COUNT' });
   }
 
-  // handlePageClick = () => {
-  //   let selected = data.selected;
-  //   let offset = Math.ceil(selected * 3);
-
-  //   this.setState({ offset: offset, });
-  //   this.props.dispatch({ type: 'GET_MOVIES', payload: { limit: 3, offset: this.state.offset } });
-
-  // };
-
+  // handles the forwards and back navigation
   handlePageClick = (page) => {
     console.log('link clicked: ', page);
     switch (page) {
@@ -47,6 +39,7 @@ class App extends Component {
 
   render() {
 
+    // Generates MovieList components
     const moviePages = [];
     // const movieLinks = [];
 
@@ -65,6 +58,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        {/* nav buttons */}
         <Button
           variant='outlined'
           color='primary'
@@ -77,8 +71,11 @@ class App extends Component {
           disabled={this.state.currentPage === Math.ceil(this.props.countReducer.count / 3) - 1}
           onClick={() => { this.handlePageClick('next') }}
         >Next</Button>
+
+        {/* adds movie pages once count is returned from server */}
         {/* {this.props.countReducer.count && movieLinks} */}
         {this.props.countReducer.count && moviePages}
+
         <Route exact path="/" render={() => (
             <Redirect to="/0" />
           )} />
