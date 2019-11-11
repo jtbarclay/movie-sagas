@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { takeEvery, put } from 'redux-saga/effects';
-import { func } from 'prop-types';
 
 function* watcherSaga() {
     yield takeEvery('GET_MOVIES', getMoviesSaga);
