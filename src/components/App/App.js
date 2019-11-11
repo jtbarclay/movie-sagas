@@ -4,13 +4,15 @@ import { Route, withRouter, Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import './App.css';
 import MoviesList from '../MoviesList/MoviesList';
-import { Button } from '@material-ui/core';
+import { Button, Modal } from '@material-ui/core';
+import Search from '../Search/Search';
 
 class App extends Component {
 
   state = {
     offset: 0,
     currentPage: 0,
+    open: false,
   };
 
   // get count for determing number of pages
@@ -36,6 +38,15 @@ class App extends Component {
         return null;
     }
   }
+
+  // handlers for search modal
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   render() {
 
@@ -82,6 +93,15 @@ class App extends Component {
           disabled={this.state.currentPage === Math.ceil(this.props.countReducer.count / 3) - 1}
           onClick={() => { this.handlePageClick('next') }}
         >Next</Button>
+        <div>
+          <Button onClick={this.handleOpen}>Search for more</Button>
+          <Modal
+            open={this.state.open}
+            onClose={this.handleClose}
+          >
+            <Search />
+          </Modal>
+        </div>
         {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>
         <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
       </div>
