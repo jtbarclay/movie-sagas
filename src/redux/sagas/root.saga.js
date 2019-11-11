@@ -24,7 +24,7 @@ function* getMoviesSaga(action) {
 function* getMoviesCountSaga() {
     try {
         const movieCount = yield axios.get('/api/movies');
-        yield put({ type: 'SET_COUNT', payload: movieCount.data})
+        yield put({ type: 'SET_COUNT', payload: movieCount.data })
     } catch (error) {
         console.log('error fetching movie count', error);
     }
@@ -34,7 +34,7 @@ function* getMoviesCountSaga() {
 function* setDetailsSaga(action) {
     try {
         yield axios.put(`/api/movies`, action.payload);
-        yield put({ type: 'GET_MOVIES'})
+        yield put({ type: 'GET_MOVIES' })
     } catch (error) {
         console.log('error setting movie details');
     }
@@ -52,7 +52,7 @@ function* getSearchSaga(action) {
 function* getConfigSaga() {
     try {
         const configResponse = yield axios.get('/api/movies/config');
-        yield put({ type: 'SET_CONFIG', payload: configResponse.data});
+        yield put({ type: 'SET_CONFIG', payload: configResponse.data });
     } catch (error) {
         console.log('error fetching config results', error);
     }
@@ -61,7 +61,8 @@ function* getConfigSaga() {
 function* postMovieSaga(action) {
     try {
         yield axios.post('/api/movies/add', action.payload);
-        yield put({ type: 'GET_MOVIES'});
+        yield put({ type: 'GET_MOVIES' });
+        setTimeout(() => window.location.reload(false), 500);
     } catch (error) {
         console.log('error posting new movie', error);
     }

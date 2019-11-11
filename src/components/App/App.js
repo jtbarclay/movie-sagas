@@ -47,7 +47,7 @@ class App extends Component {
   handleClose = () => {
     this.setState({ open: false });
     this.props.history.push('/0');
-    setTimeout(() => window.location.reload(false), 500);
+    // setTimeout(() => window.location.reload(false), 500);
   };
 
   render() {
