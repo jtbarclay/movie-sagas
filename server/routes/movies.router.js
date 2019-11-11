@@ -6,6 +6,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.post('/', (req, res) => {
+
+    // default limit and offset
+    let limit = req.body.limit || 3;
+    let offset = req.body.offset || 0;
+    console.log('limit2: ', limit, 'offset2: ', offset);
     //sql query to return all movies
     const query = `
         SELECT m.*, array_agg(g.name) as "genres" from movies_genres mg
@@ -17,7 +22,7 @@ router.post('/', (req, res) => {
         OFFSET $2;
     `;
 
-    pool.query(query, [req.body.limit, req.body.offset])
+    pool.query(query, [limit, offset])
         .then((response) => {
             console.log('movies GET response', response);
             res.send(response.rows)
@@ -67,7 +72,7 @@ router.put('/', (req, res) => {
 // tmdb serach api
 router.post('/search', (req, res) => {
     const searchQuery = req.body;
-    
+
     const path = 'https://api.themoviedb.org/3/search/movie'
 
     const params = {
@@ -78,14 +83,14 @@ router.post('/search', (req, res) => {
         include_adult: 'false',
     };
 
-    axios.get(path, {params})
+    axios.get(path, { params })
         .then((response) => {
             console.log('tmdb GET response', response);
             res.send(response.data)
         })
         .catch((error) => {
             console.log('tmdb GET error', error);
-            
+
         })
 });
 
@@ -98,14 +103,14 @@ router.get('/config', (req, res) => {
         api_key: process.env.TMDB_API_KEY,
     };
 
-    axios.get(path, {params})
+    axios.get(path, { params })
         .then((response) => {
             console.log('tmdb GET config response', response);
             res.send(response.data)
         })
         .catch((error) => {
             console.log('tmdb GET config error', error);
-            
+
         })
 });
 

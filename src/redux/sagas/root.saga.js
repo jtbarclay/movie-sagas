@@ -62,7 +62,7 @@ function* postMovieSaga(action) {
     try {
         yield axios.post('/api/movies/add', action.payload);
         yield put({ type: 'GET_MOVIES' });
-        setTimeout(() => window.location.reload(false), 500);
+        // setTimeout(() => window.location.reload(false), 500);
     } catch (error) {
         console.log('error posting new movie', error);
     }
