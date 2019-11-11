@@ -55,7 +55,8 @@ VALUES
 ('Romantic'),
 ('Science Fiction'),
 ('Space-Opera'),
-('Superhero');
+('Superhero'),
+('User Added');
 
 -- starter genre junctions
 INSERT INTO "movies_genres" ("movie_id", "genre_id")

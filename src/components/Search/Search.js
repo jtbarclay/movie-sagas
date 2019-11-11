@@ -8,7 +8,9 @@ export class Search extends Component {
             <div>
                 <Paper>
                 <h1>Search</h1>
-                <SearchForm/>
+                <SearchForm
+                    handleClose={this.props.handleClose}
+                />
                 </Paper>
             </div>
         )

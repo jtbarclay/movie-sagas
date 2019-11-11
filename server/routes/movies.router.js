@@ -64,12 +64,10 @@ router.put('/', (req, res) => {
         })
 })
 
+// tmdb serach api
 router.post('/search', (req, res) => {
-    console.log('IN ROUTER req.body: ', req.body);
     const searchQuery = req.body;
-    console.log('IN ROUTER searchQuery: ', searchQuery);
     
-
     const path = 'https://api.themoviedb.org/3/search/movie'
 
     const params = {
@@ -90,5 +88,48 @@ router.post('/search', (req, res) => {
             
         })
 });
+
+// tmdb config for img url
+router.get('/config', (req, res) => {
+
+    const path = 'https://api.themoviedb.org/3/configuration'
+
+    const params = {
+        api_key: process.env.TMDB_API_KEY,
+    };
+
+    axios.get(path, {params})
+        .then((response) => {
+            console.log('tmdb GET config response', response);
+            res.send(response.data)
+        })
+        .catch((error) => {
+            console.log('tmdb GET config error', error);
+            
+        })
+});
+
+// add a new movie
+router.post('/add', (req, res) => {
+    //sql query to return all movies
+    const query = `
+        WITH ins1 AS(
+        INSERT INTO "movies" ("title", "poster", "description")
+        VALUES ($1, $2, $3)
+        RETURNING id AS movie_id)
+        INSERT INTO "movies_genres" ("movie_id", "genre_id")
+        SELECT movie_id, '14' FROM ins1;
+    `;
+
+    pool.query(query, [req.body.title, `https://image.tmdb.org/t/p/w500${req.body.poster_path}`, req.body.overview])
+        .then((response) => {
+            console.log('movies POST response', response);
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.log('movies POST error', error);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = router;

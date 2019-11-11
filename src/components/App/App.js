@@ -46,6 +46,8 @@ class App extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+    this.props.history.push('/0');
+    window.location.reload(false);
   };
 
   render() {
@@ -69,7 +71,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header><h1>Movies</h1></header>
+        <header><h1>My Movies</h1></header>
         {/* adds movie pages once count is returned from server */}
         {/* {this.props.countReducer.count && movieLinks} */}
         {this.props.countReducer.count && moviePages}
@@ -99,7 +101,9 @@ class App extends Component {
             open={this.state.open}
             onClose={this.handleClose}
           >
-            <Search />
+            <Search 
+              handleClose={this.handleClose}
+            />
           </Modal>
         </div>
         {/* <pre>{JSON.stringify(this.state, null, 2)}</pre>

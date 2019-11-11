@@ -7,6 +7,8 @@ function* watcherSaga() {
     yield takeEvery('PUT_MOVIES', setDetailsSaga);
     yield takeEvery('GET_COUNT', getMoviesCountSaga);
     yield takeEvery('GET_SEARCH', getSearchSaga);
+    yield takeEvery('GET_CONFIG', getConfigSaga);
+    yield takeEvery('POST_MOVIE', postMovieSaga);
 }
 
 // GET request to server at /api/movies to tell server to get all movies from db
@@ -41,12 +43,28 @@ function* setDetailsSaga(action) {
 
 function* getSearchSaga(action) {
     try {
-        console.log('in getSearchSaga action.payload: ', action.payload);
-        
         const tmdbResponse = yield axios.post('/api/movies/search', action.payload);
         yield put({ type: 'SET_SEARCH', payload: tmdbResponse.data });
     } catch (error) {
         console.log('error fetching search results', error);
+    }
+}
+
+function* getConfigSaga() {
+    try {
+        const configResponse = yield axios.get('/api/movies/config');
+        yield put({ type: 'SET_CONFIG', payload: configResponse.data});
+    } catch (error) {
+        console.log('error fetching config results', error);
+    }
+}
+
+function* postMovieSaga(action) {
+    try {
+        yield axios.post('/api/movies/add', action.payload);
+        yield put({ type: 'GET_MOVIES'});
+    } catch (error) {
+        console.log('error posting new movie', error);
     }
 }
 

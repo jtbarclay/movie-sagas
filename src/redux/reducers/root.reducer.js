@@ -27,10 +27,20 @@ const searchReducer = (state = [], action) => {
     }
 }
 
+const configReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_CONFIG':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 const allReducers = combineReducers({
     moviesReducer,
     countReducer,
     searchReducer,
+    configReducer,
 });
 
 export default allReducers;
