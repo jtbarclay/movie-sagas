@@ -18,9 +18,19 @@ const countReducer = (state = {count: "10"}, action) => {
     }
 }
 
+const searchReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SEARCH':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 const allReducers = combineReducers({
     moviesReducer,
     countReducer,
+    searchReducer,
 });
 
 export default allReducers;

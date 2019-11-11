@@ -1,3 +1,5 @@
+require('dotenv').config();
+const axios = require('axios');
 const express = require('express');
 const pool = require('../modules/pool');
 
@@ -61,5 +63,32 @@ router.put('/', (req, res) => {
             res.sendStatus(500);
         })
 })
+
+router.post('/search', (req, res) => {
+    console.log('IN ROUTER req.body: ', req.body);
+    const searchQuery = req.body;
+    console.log('IN ROUTER searchQuery: ', searchQuery);
+    
+
+    const path = 'https://api.themoviedb.org/3/search/movie'
+
+    const params = {
+        api_key: process.env.TMDB_API_KEY,
+        language: 'en-US',
+        query: searchQuery,
+        page: '1',
+        include_adult: 'false',
+    };
+
+    axios.get(path, {params})
+        .then((response) => {
+            console.log('tmdb GET response', response);
+            res.send(response.data)
+        })
+        .catch((error) => {
+            console.log('tmdb GET error', error);
+            
+        })
+});
 
 module.exports = router;
